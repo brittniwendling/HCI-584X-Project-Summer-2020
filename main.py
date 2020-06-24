@@ -62,7 +62,7 @@ def askQuestion():
         tk.Label(window, text="Congratulations - you finished the quiz! " + str(num_right) + " of " + str(number_of_questions) + " questions were answered correctly. Nice work!").pack() # show questions correct
         tk.Label(window, text="Total number of points:" + str(points)).pack() # show total points
         return
-    button.pack_forget()
+    begin_button.pack_forget()
     index = index + 1
     questions[index].getView(window).pack()
 
@@ -86,6 +86,8 @@ points = 0 # total points counter
 number_of_questions = len(questions) #total questions in set
 
 window = tk.Tk() # tkinter window
-button = tk.Button(window, text="Begin Quiz", command=askQuestion) # Begin Quiz button
-button.pack()
+begin_button = tk.Button(window, text="Begin Quiz", command=askQuestion) # Begin Quiz button
+begin_button.pack()
+quit_button = tk.Button(window,text="Quit Quiz", command=window.quit) # Quit Quiz button
+quit_button.pack()
 window.mainloop()
