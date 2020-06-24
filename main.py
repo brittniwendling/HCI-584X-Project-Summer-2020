@@ -20,8 +20,8 @@ class Question:
 
 # check answers for correctness function
     def check(self, letter, view):
-        global num_right
-        global points
+        num_right = 0
+        points = 0
         if(letter == self.correctLetter):
             label = tk.Label(view, text="Correct! +10 points!")
             num_right = num_right + 1 # 1 right num added
