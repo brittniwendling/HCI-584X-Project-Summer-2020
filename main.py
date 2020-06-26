@@ -123,7 +123,7 @@ points_possible = number_of_questions * 10 #total points possible
 
 ##### main:
 root = tk.Tk() # creates main tkinter window
-root.geometry('700x300') #sets size of tk window
+root.geometry('700x400') #sets size of tk window
 root.title("StudyStar⭐️") #root title
 #root.configure(background = "black") #changes background color
 
