@@ -35,11 +35,12 @@ class Question:
                 break
            
             tries = tries - 1 #lose a try if answer is wrong
+    
 
             if tries == 0: # 0 tries left      
                 tk.Label(view, text='INCORRECT! You ran out of your attempts.', font='Helvetica 14 bold', fg="red").pack()
                 points = points - 5 #lose 5 points
-                tries = tries + 2 #tries is reset to 2 for next question
+                tries = 2 #tries is reset to 2 for next question
                 stop_asking = True
                 break
 
@@ -91,8 +92,8 @@ def askQuestion():
 
     begin_button.pack_forget() #Begin quiz button disappears
     qset_name_button.pack_forget()#Submit qset name button disappears
-    qset_label.pack_forget()
-    textentry.pack_forget()
+    qset_label.pack_forget() #qset label disappears
+    textentry.pack_forget() # qset name entry disappears
     index = index + 1
     questions[index].getView(root).pack()
     
@@ -133,13 +134,17 @@ tk.Label(root, text="Welcome to StudyStar⭐️!", font='Helvetica 30 bold').pac
 # Set Question Set Name
 def set_qset_name():
     qset_name = textentry.get()
-    tk.Label(root, text="Your Question Set Name Is:" + qset_name, font='Helvetica 18').pack() 
+    tk.Label(root, text="Your Question Set Name Is:" + qset_name, font='Helvetica 18').pack()
+    qset_name_button.pack_forget()#Submit qset name button disappears
+    qset_label.pack_forget() #qset label disappears
+    textentry.pack_forget() # qset name entry disappears 
 qset_label = tk.Label(root, text="Enter a name for your question set:")
 qset_label.pack() 
 textentry = Entry(root, width = 20, bg="black", fg="white")
 textentry.pack()
 qset_name_button = tk.Button(root, text="Submit", width=6, command=set_qset_name)
 qset_name_button.pack()
+
 
 
 
