@@ -4,6 +4,8 @@
 # Author(s): Brittni Wendling
 # Created:   06/09/2020
 #-------------------------------------------------------------------------------
+import sys
+import os
 
 #imports tkinter
 from tkinter import *
@@ -23,15 +25,30 @@ class Question:
     def check(self, letter, view):
         global num_right
         global points
-        if(letter == self.correctLetter):
-            label = tk.Label(view, text="Correct! +10 points!", font='Helvetica 14 bold')
-            num_right = num_right + 1 # 1 right num added
-            points = points + 10 # add 10 points
-        else:
-            label = tk.Label(view, text="Incorrect! -5 points", font='Helvetica 14 bold')
-            points = points - 5 # loses 5 points
-        label.pack()
-        view.after(1000, lambda *args: self.unpackView(view))
+        global tries
+        while True:
+            if(letter == self.correctLetter): # correct answer
+                tk.Label(view, text="CORRECT! +10 points!", font='Helvetica 14 bold', fg="green").pack()
+                num_right = num_right + 1 # 1 right num added
+                points = points + 10 # add 10 points
+                stop_asking = False
+                break
+           
+            tries = tries - 1 #lose a try if answer is wrong
+
+            if tries == 0: # 0 tries left      
+                tk.Label(view, text='INCORRECT! You ran out of your attempts.', font='Helvetica 14 bold', fg="red").pack()
+                points = points - 5 #lose 5 points
+                tries = tries + 2 #tries is reset to 2 for next question
+                stop_asking = True
+                break
+
+            tk.Label(view, text='INCORRECT! -5 points! Try again. You have' + str(tries) + "attempt remaining.", font='Helvetica 14 bold', fg="red").pack()
+            points = points - 5 #lose 5 points
+            if stop_asking:
+                break
+        
+        view.after(1000, lambda *args: self.unpackView(view)) # time delay between questions
 
 
     def getView(self, root):
@@ -55,7 +72,7 @@ class Question:
     def unpackView(self, view):
         view.pack_forget()
         askQuestion()
-   
+
 
 # ask a question function
 start_time = time.time() #starts time with current time
@@ -67,11 +84,19 @@ def askQuestion():
         elapsed_time = time.time() - start_time
         time.strftime("%H:%M:%S", time.gmtime(elapsed_time)) # formats elapsed time 
         tk.Label(root, text="Total elapsed time:"+ str(elapsed_time)).pack() # makes label for elapsed time
+        # Replay button
+        replay_button = tk.Button(root,text="Study Again", command=set_qset_name)
+        replay_button.pack()
         return
-    begin_button.pack_forget()
+
+    begin_button.pack_forget() #Begin quiz button disappears
+    qset_name_button.pack_forget()#Submit qset name button disappears
+    qset_label.pack_forget()
+    textentry.pack_forget()
     index = index + 1
     questions[index].getView(root).pack()
-
+    
+    
 # reads from questions file
 questions = [] # creates question list
 file = open("questions.txt", "r") # opens the .txt file in same folder
@@ -92,38 +117,39 @@ file.close() # close file
 index = -1 # index counter
 num_right = 0 # number right counter
 points = 0 # number points counter 
+tries = 2
 number_of_questions = len(questions) #total questions in set
 points_possible = number_of_questions * 10 #total points possible
 
 ##### main:
 root = tk.Tk() # creates main tkinter window
-root.geometry('500x500') #sets size of tk window
+root.geometry('700x300') #sets size of tk window
 root.title("StudyStar⭐️") #root title
 #root.configure(background = "black") #changes background color
 
 #Welcome message
-tk.Label(root, text="Welcome to StudyStar⭐️ - Let's get studying!", font='Helvetica 18 bold').pack()
+tk.Label(root, text="Welcome to StudyStar⭐️!", font='Helvetica 30 bold').pack()
 
 # Set Question Set Name
 def set_qset_name():
     qset_name = textentry.get()
-    tk.Label(root, text="Your Question Set Name Is:" + qset_name).pack() 
-qset_label = tk.Label(root, text="Enter a name for your question set:").pack() 
+    tk.Label(root, text="Your Question Set Name Is:" + qset_name, font='Helvetica 18').pack() 
+qset_label = tk.Label(root, text="Enter a name for your question set:")
+qset_label.pack() 
 textentry = Entry(root, width = 20, bg="black", fg="white")
 textentry.pack()
-qset_name_button = tk.Button(root, text="Submit", width=6, command=set_qset_name).pack()
+qset_name_button = tk.Button(root, text="Submit", width=6, command=set_qset_name)
+qset_name_button.pack()
+
+
 
 # Begin Quiz button
-begin_button = tk.Button(root, text="Begin Quiz", command=askQuestion, ) 
+begin_button = tk.Button(root, text="Begin Studying", command=askQuestion) 
 begin_button.pack()
 
 # Quit Quiz button
 quit_button = tk.Button(root,text="Quit Quiz", command=root.quit) 
 quit_button.pack()
-
-# Replay button
-replay_button = tk.Button(root,text="Play Again", command=None)
-replay_button.pack()
 
 
 root.mainloop() #loops the main tkinter window
