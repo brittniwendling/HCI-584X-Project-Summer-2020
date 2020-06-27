@@ -4,8 +4,6 @@
 # Author(s): Brittni Wendling
 # Created:   06/09/2020
 #-------------------------------------------------------------------------------
-import sys
-import os
 
 #imports tkinter
 from tkinter import *
@@ -13,6 +11,43 @@ import tkinter as tk
 
 #imports time
 import time 
+
+##### main:
+root = tk.Tk() # creates main tkinter window
+root.geometry('700x400') #sets size of tk window
+root.title("StudyStar⭐️") #root title
+#root.configure(background = "black") #changes background color
+
+#Welcome message
+tk.Label(root, text="Welcome to StudyStar⭐️!", font='Helvetica 30 bold').pack()
+
+
+class QuizApp:
+    def __init__(self, main):
+        self.myFrame = Frame(main)
+        self.myFrame.pack()
+        self.begin_button = tk.Button(main, text="Begin Studying", command=self.askQuestion) # Begin Quiz button
+        self.begin_button.pack() 
+        self.quit_button = tk.Button(main,text="Quit Quiz", command=root.quit) # Quit Quiz button
+        self.quit_button.pack()
+
+e = QuizApp(root)
+
+
+# Set Question Set Name
+def set_qset_name():
+    qset_name = textentry.get()
+    tk.Label(root, text="Your Question Set Name Is:" + qset_name, font='Helvetica 18').pack()
+    begin_button.pack()
+    qset_name_button.pack_forget()#Submit qset name button disappears
+    qset_label.pack_forget() #qset label disappears
+    textentry.pack_forget() # qset name entry disappears 
+qset_label = tk.Label(root, text="Enter a name for your question set:", font='Helvetica 18')
+qset_label.pack() 
+textentry = Entry(root, width = 20, bg="black", fg="white")
+textentry.pack()
+qset_name_button = tk.Button(root, text="Submit", width=6, command=set_qset_name)
+qset_name_button.pack()
 
 # create Question class
 class Question:
@@ -51,10 +86,9 @@ class Question:
         
         view.after(1000, lambda *args: self.unpackView(view)) # time delay between questions
 
-
     def getView(self, root):
         view = tk.Frame(root)
-
+    
         # answer button widget creation
         label = tk.Label(view, text=self.question)
         button_a = tk.Button(view, text=self.answers[0], command=lambda *args: self.check("A", view))
@@ -74,10 +108,10 @@ class Question:
         view.pack_forget()
         askQuestion()
 
-
 # ask a question function
 start_time = time.time() #starts time with current time
-def askQuestion():
+
+def askQuestion(self):  
     global questions, root, index, button, num_right, number_of_questions, points 
     if(len(questions) == index + 1): #if last question has been answered
         tk.Label(root, text="Congratulations - you finished the quiz! " + str(num_right) + " of " + str(number_of_questions) + " questions were answered correctly. Nice work!").pack() # show questions correct
@@ -86,7 +120,7 @@ def askQuestion():
         time.strftime("%H:%M:%S", time.gmtime(elapsed_time)) # formats elapsed time 
         tk.Label(root, text="Total elapsed time:"+ str(elapsed_time)).pack() # makes label for elapsed time
         # Replay button
-        replay_button = tk.Button(root,text="Study Again", command=set_qset_name)
+        replay_button = tk.Button(root,text="Study Again", command=None)
         replay_button.pack()
         return
 
@@ -96,6 +130,7 @@ def askQuestion():
     textentry.pack_forget() # qset name entry disappears
     index = index + 1
     questions[index].getView(root).pack()
+    
     
     
 # reads from questions file
@@ -122,39 +157,7 @@ tries = 2
 number_of_questions = len(questions) #total questions in set
 points_possible = number_of_questions * 10 #total points possible
 
-##### main:
-root = tk.Tk() # creates main tkinter window
-root.geometry('700x400') #sets size of tk window
-root.title("StudyStar⭐️") #root title
-#root.configure(background = "black") #changes background color
 
-#Welcome message
-tk.Label(root, text="Welcome to StudyStar⭐️!", font='Helvetica 30 bold').pack()
-
-# Set Question Set Name
-def set_qset_name():
-    qset_name = textentry.get()
-    tk.Label(root, text="Your Question Set Name Is:" + qset_name, font='Helvetica 18').pack()
-    qset_name_button.pack_forget()#Submit qset name button disappears
-    qset_label.pack_forget() #qset label disappears
-    textentry.pack_forget() # qset name entry disappears 
-qset_label = tk.Label(root, text="Enter a name for your question set:")
-qset_label.pack() 
-textentry = Entry(root, width = 20, bg="black", fg="white")
-textentry.pack()
-qset_name_button = tk.Button(root, text="Submit", width=6, command=set_qset_name)
-qset_name_button.pack()
-
-
-
-
-# Begin Quiz button
-begin_button = tk.Button(root, text="Begin Studying", command=askQuestion) 
-begin_button.pack()
-
-# Quit Quiz button
-quit_button = tk.Button(root,text="Quit Quiz", command=root.quit) 
-quit_button.pack()
 
 
 root.mainloop() #loops the main tkinter window
