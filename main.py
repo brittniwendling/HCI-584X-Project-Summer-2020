@@ -21,7 +21,7 @@ root.geometry('700x400') #sets size of tk window
 root.title("StudyStar⭐️") #window title
 #root.configure(background = "black") #changes background color
 
-#Welcome message
+# Welcome message
 tk.Label(root, text="Welcome to StudyStar⭐️!", font='Helvetica 30 bold').pack()
 
 # show instructions for StudyStar⭐️
