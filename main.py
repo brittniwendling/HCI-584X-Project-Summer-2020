@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # Name:      main.py
-# Purpose:   Primary program flow for Quiz Application
+# Purpose:   Primary program flow for StudyStar⭐️ Quiz Application
 # Author(s): Brittni Wendling
 # Created:   06/09/2020
 #-------------------------------------------------------------------------------
@@ -33,6 +33,7 @@ def about():
 def set_qset_name():
     qset_name = textentry.get()
     tk.Label(root, text="Your Question Set Name Is:" + qset_name, font='Helvetica 18').pack()
+    tk.Label(root,text = "Your Questions are coming from the file: questions.txt" ).pack() #eventually this will be updated w/ 2nd GUI?
     begin_button.pack()
     qset_name_button.pack_forget()#Submit qset name button disappears
     qset_label.pack_forget() #qset label disappears
@@ -55,13 +56,14 @@ class Question:
 
     # check answers for correctness function
     def check(self, letter, view):
-        global num_right 
-        global points
+        global num_right   # CH Don't use globals for that! check() should just return True/False (or 1/0)
+        global points      # and what ever called check() should update num_right then
+                           # If you want to do the update here, give check num_right as an arg and return it
         global tries
         while True:
             if(letter == self.correctLetter): # correct answer
                 tk.Label(view, text="CORRECT! +10 points!", font='Helvetica 14 bold', fg="green").pack()
-                num_right = num_right + 1 # 1 right num added
+                num_right = num_right + 1 # 1 right num added  # CH do this "outside"
                 points = points + 10 # add 10 points
                 stop_asking = False
                 break
@@ -104,7 +106,6 @@ class Question:
         view.pack_forget()
         askQuestion()
 
-
 # ask a question function
 start_time = time.time() #starts time with current time
 
@@ -125,12 +126,14 @@ def askQuestion():
     qset_name_button.pack_forget()#Submit qset name button disappears
     qset_label.pack_forget() #qset label disappears
     textentry.pack_forget() # qset name entry disappears
+    
     index = index + 1
     questions[index].getView(root).pack()
     
 # reads from questions file
 questions = [] # creates question list
 file = open("questions.txt", "r") # opens the .txt file in same folder
+                                    #eventually the file will come from the 2nd GUI!
 line = file.readline() # read lines in .txt file
 while(line != ""): # line not empty
     questionString = line
@@ -148,10 +151,12 @@ file.close() # close file
 index = -1 # index counter
 num_right = 0 # number right counter
 points = 0 # number points counter 
-tries = 2
+tries = 2 #number tries counter
+
 number_of_questions = len(questions) #total questions in set
 points_possible = number_of_questions * 10 #total points possible
 
+# CH this button could eventually become an app class that you instantiate here and give window as an arg ...
 # Begin Quiz button
 begin_button = tk.Button(root, text="Begin Studying", command=askQuestion) 
 
