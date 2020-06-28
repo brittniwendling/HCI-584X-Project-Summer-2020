@@ -1,14 +1,14 @@
-- Add "Play Again" Button for replaying quiz again
-- Figure out a differnt way for user to input the questions, or is reading from a file.txt the best?
-- Figure out how to save and load the data (attributes) of the class into a file
+- Add "Play Again" Button for replaying quiz again--needs to bring user back to homepage. How do I make it go back to the main frame? Need multiple frames?
+- Figure out the second GUI way for user to input the questions by typing and have them saved into a file: save and load the data of the class into a file
+- Figure out how to add text entry field to load whatever .txt file full of questions for the app
+- Make everything allign with Classes
 
 Mabye for version 2?
 - Version 2: Have a countdown timer function...Base points off of how fast you answer?
 - Option to randomize question order presented?
 - Add a gaming element for engagement/visual appeal
 - Allow users to type in their responses instead of multiple choice hitting pre-selected button answers?
-- Running tally of points score shown on screen at all times??
-- Add an instructions page
+- Fill out instructions message box
 - Allow users to select their questions.txt file for the program to read?
 
 DONE
