@@ -4,9 +4,12 @@
 # Author(s): Brittni Wendling
 # Created:   06/09/2020
 #-------------------------------------------------------------------------------
+import sys
+import os
 
 #imports tkinter
 from tkinter import *
+from tkinter import messagebox
 import tkinter as tk 
 
 #imports time
@@ -15,24 +18,16 @@ import time
 ##### main:
 root = tk.Tk() # creates main tkinter window
 root.geometry('700x400') #sets size of tk window
-root.title("StudyStar⭐️") #root title
+root.title("StudyStar⭐️") #window title
 #root.configure(background = "black") #changes background color
 
 #Welcome message
 tk.Label(root, text="Welcome to StudyStar⭐️!", font='Helvetica 30 bold').pack()
 
-
-class QuizApp:
-    def __init__(self, main):
-        self.myFrame = Frame(main)
-        self.myFrame.pack()
-        self.begin_button = tk.Button(main, text="Begin Studying", command=self.askQuestion) # Begin Quiz button
-        self.begin_button.pack() 
-        self.quit_button = tk.Button(main,text="Quit Quiz", command=root.quit) # Quit Quiz button
-        self.quit_button.pack()
-
-e = QuizApp(root)
-
+# show instructions for StudyStar⭐️
+def about():
+    messagebox.showinfo(title="About StudyStar⭐️",message="Put instructions for StudyStar⭐️ here! ")
+    return
 
 # Set Question Set Name
 def set_qset_name():
@@ -46,8 +41,10 @@ qset_label = tk.Label(root, text="Enter a name for your question set:", font='He
 qset_label.pack() 
 textentry = Entry(root, width = 20, bg="black", fg="white")
 textentry.pack()
-qset_name_button = tk.Button(root, text="Submit", width=6, command=set_qset_name)
+qset_name_button = tk.Button(root, text="Submit", width=6, command=set_qset_name)#Submit button
 qset_name_button.pack()
+about_button = tk.Button(root, text="Instructions", command=about) #Instructions button
+about_button.pack(side = BOTTOM)
 
 # create Question class
 class Question:
@@ -56,9 +53,9 @@ class Question:
         self.answers = answers
         self.correctLetter = correctLetter
 
-# check answers for correctness function
+    # check answers for correctness function
     def check(self, letter, view):
-        global num_right
+        global num_right 
         global points
         global tries
         while True:
@@ -71,7 +68,6 @@ class Question:
            
             tries = tries - 1 #lose a try if answer is wrong
     
-
             if tries == 0: # 0 tries left      
                 tk.Label(view, text='INCORRECT! You ran out of your attempts.', font='Helvetica 14 bold', fg="red").pack()
                 points = points - 5 #lose 5 points
@@ -108,10 +104,11 @@ class Question:
         view.pack_forget()
         askQuestion()
 
+
 # ask a question function
 start_time = time.time() #starts time with current time
 
-def askQuestion(self):  
+def askQuestion():  
     global questions, root, index, button, num_right, number_of_questions, points 
     if(len(questions) == index + 1): #if last question has been answered
         tk.Label(root, text="Congratulations - you finished the quiz! " + str(num_right) + " of " + str(number_of_questions) + " questions were answered correctly. Nice work!").pack() # show questions correct
@@ -130,8 +127,6 @@ def askQuestion(self):
     textentry.pack_forget() # qset name entry disappears
     index = index + 1
     questions[index].getView(root).pack()
-    
-    
     
 # reads from questions file
 questions = [] # creates question list
@@ -157,7 +152,12 @@ tries = 2
 number_of_questions = len(questions) #total questions in set
 points_possible = number_of_questions * 10 #total points possible
 
+# Begin Quiz button
+begin_button = tk.Button(root, text="Begin Studying", command=askQuestion) 
 
+# Quit Quiz button
+quit_button = tk.Button(root,text="Quit Quiz", command=root.quit) 
+quit_button.pack(side = BOTTOM)
 
 
 root.mainloop() #loops the main tkinter window
