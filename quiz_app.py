@@ -3,8 +3,8 @@ from tkinter import * # import everything from module and put into global namesp
 from classes import Question, Question_set
 
 # test
-q = Question("What color is a lemon?", ["Blue", "limonetta", "yellow"], "C")
-print(q.check("Blue"))
+q = Question("What color is a lemon?", ["blue", "limonetta", "yellow"], "C")
+print(q.check("blue"))
 print(q)
 
 
@@ -16,7 +16,7 @@ class Quiz_app(object):
         self.load_qset_GUI()
 
     def load_qset_GUI(self):
-        # I don't need to make the Labels attributes here b/c I don't need to talk to them later and
+        # I don't need to make the Label and Button attributes here b/c I don't need to talk to them later and
         # they are inside the Frame when they are destroyed later. But, if you need to config them later you must
         # make the attributes!
         qset_label = Label(self.frame, text="Name for question set:")
