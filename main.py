@@ -14,20 +14,37 @@ import tkinter as tk
 
 #imports time
 import time 
+import datetime
 
 ##### main:
 root = tk.Tk() # creates main tkinter window
-root.geometry('700x400') #sets size of tk window
+root.geometry('700x500') #sets size of tk window
 root.title("StudyStar⭐️") #window title
 #root.configure(background = "black") #changes background color
 
 # Welcome message
-tk.Label(root, text="Welcome to StudyStar⭐️!", font='Helvetica 30 bold').pack()
+tk.Label(root, text="Welcome to StudyStar⭐️!", font='Helvetica 50 bold').pack()
 
 # show instructions for StudyStar⭐️
 def about():
     messagebox.showinfo(title="About StudyStar⭐️",message="Put instructions for StudyStar⭐️ here! ")
     return
+
+# Clock
+def clock():
+    hour = time.strftime("%H") #hour
+    minute = time.strftime("%M") #minute
+    second = time.strftime("%S") #second
+    am_pm = time.strftime("%p") #am or pm
+
+    clock_label.config(text=hour + ":" + minute + ":" + second + " " + am_pm)
+    clock_label.after(1000, clock)
+
+clock_label = tk.Label(root, text="",font='Helvetica 40 bold', fg="white", bg="black")
+clock_label.pack()
+
+# Run Clock function    
+clock()
 
 # Set Question Set Name
 def set_qset_name():
@@ -38,7 +55,7 @@ def set_qset_name():
     qset_name_button.pack_forget()#Submit qset name button disappears
     qset_label.pack_forget() #qset label disappears
     textentry.pack_forget() # qset name entry disappears 
-qset_label = tk.Label(root, text="Enter a name for your question set:", font='Helvetica 18')
+qset_label = tk.Label(root, text="Enter a name for your question set:", font='Helvetica 30')
 qset_label.pack() 
 textentry = Entry(root, width = 20, bg="black", fg="white")
 textentry.pack()
@@ -166,7 +183,6 @@ begin_button = tk.Button(root, text="Begin Studying", command=askQuestion)
 # Quit Quiz button
 quit_button = tk.Button(root,text="Quit Quiz", command=root.quit) 
 quit_button.pack(side = BOTTOM)
-
 
 root.mainloop() #loops the main tkinter window
 
