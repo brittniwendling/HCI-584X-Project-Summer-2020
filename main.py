@@ -131,7 +131,7 @@ class Question:
 def askQuestion():  
     global questions, root, index, button, num_right, number_of_questions, points 
     if(len(questions) == index + 1): #if last question has been answered
-        tk.Label(root, text="Congratulations - you finised the quiz! ").grid(row=3) # show questions correct
+        tk.Label(root, text="Congratulations - you finished the quiz! ").grid(row=3) # show questions correct
         tk.Label(root, text=str(num_right) + " out of " + str(number_of_questions) + " questions were answered correctly.").grid(row=4)
         tk.Label(root, text="Total number of points:" + " " + str(points) + " " + "out of" + " " + str(points_possible)).grid(row=5) # show total points
         #elapsed_time = time.time() - start_time
