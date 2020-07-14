@@ -8,7 +8,7 @@ import sys
 import os
 
 #imports tkinter
-from tkinter import *
+from tkinter import * 
 from tkinter import messagebox
 import tkinter as tk 
 
@@ -66,6 +66,7 @@ class Question:
                 num_right = num_right + 1 # 1 right num added  # CH do this "outside"
                 points = points + 10 # add 10 points
                 stop_asking = False
+                tries = 2 #tries is reset to 2 for next question
                 break
            
             tries = tries - 1 #lose a try if answer is wrong
@@ -73,14 +74,16 @@ class Question:
             if tries == 0: # 0 tries left      
                 tk.Label(view, text='INCORRECT! You ran out of your attempts.', font='Helvetica 14 bold', fg="red").pack()
                 points = points - 5 #lose 5 points
-                tries = 2 #tries is reset to 2 for next question
                 stop_asking = True
+                tries = 2 #tries is reset to 2 for next question
                 break
-
+                
             tk.Label(view, text='INCORRECT! -5 points! Try again. You have' + str(tries) + "attempt remaining.", font='Helvetica 14 bold', fg="red").pack()
             points = points - 5 #lose 5 points
             if stop_asking:
+                tries = 2 #tries is reset to 2 for next question
                 break
+                
         
         view.after(1000, lambda *args: self.unpackView(view)) # time delay between questions
 
