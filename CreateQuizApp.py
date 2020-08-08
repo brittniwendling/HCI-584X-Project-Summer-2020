@@ -40,7 +40,7 @@ class MainQuizApp():
 
 	def about(self):
 		"""
-		Function to displays the instructions for StudyStar⭐️ in a messagebox.
+		Function that displays the instructions for StudyStar⭐️ in a messagebox.
 
 		Returns:
 			tkinter messagebox with instructions for the quiz
@@ -206,7 +206,7 @@ class MainQuizApp():
 
 	def check_and_update(self):
 		"""
-		Function updates the answer label showon to incorrect/correct based on whether the user answered correctly. After a set 
+		Function updates the answer label shown to incorrect/correct based on whether the user answered correctly. After a set 
 		time, the function will update to get the next question in the set.
 		"""
 		self._update_answer_label()
@@ -291,5 +291,6 @@ class MainQuizApp():
 		self.about_button = tk.Button(self.root, text="Instructions", font='Helvetica 16', highlightbackground='#375e97', command=self.about)
 		self.about_button.grid(row=1, column=1)
 
-		# study again button
-		self.study_again_button = tk.Button(self.root, text="Study Again",font='Helvetica 16', fg='#3f681c', highlightbackground='#375e97', command=None) #TODO
+		# study again button - not implemented
+		#TODO: future work on this button bringing user back to homescreen
+		self.study_again_button = tk.Button(self.root, text="Study Again",font='Helvetica 16', fg='#3f681c', highlightbackground='#375e97', command=None)
