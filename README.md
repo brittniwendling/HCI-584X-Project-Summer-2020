@@ -28,13 +28,7 @@ To begin using StudyStar⭐️, users will need to have create .csv files storin
 
 .csv file structuring guidelines: 
 1. Have the first row of the .csv file be a header row with the names "Question", "Choice 1", Choice 2", Choice 3", Choice 4", "Correct Answer". Although it is technically possible to have more than 4 "Choice" options, it is not recommended, due to keeping the GUI clean and quiz clean from complications.
-2. Type your questions in the "Question" column. The app will use this column to present this back as the question while taking the quiz. You can type them in whatever formatting/wording works best for you. Some examples:
-
-        - The unit of charge is called the _____.
-        - The symbol Mn on the periodic table stands for:
-        - 100 + 100 = ?
-        - Who founded Apple?
-        
+2. Type your questions in the "Question" column. The app will use this column to present this back as the question while taking the quiz. You can type them in whatever formatting/wording works best for you. Some examples:The unit of charge is called the _____.;The symbol Mn on the periodic table stands for:;100 + 100 = ?; Who founded Apple?
 3. Type your question answer options in the "Choice" columns. The app will use these columns to present the content back in radio buttons displaying answers to choose from while taking the quiz.
 4. Type the correct answer out of the options in the "Correct Answer" column. The "Correct Answer" column designates the correct answer and is what the application uses to know if the user selected an answer correctly or incorrectly. 
 5. Save your .csv file anywhere on your computer (not required, but recommended to save all files in in the actual project root folder called "questions csv files") with a name that describes the study question set, such as "science_exam7", "math_quiz2", "english_test1", etc.
