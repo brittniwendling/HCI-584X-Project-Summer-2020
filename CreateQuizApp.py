@@ -9,8 +9,10 @@
 """
 This module handles the primary program flow for StudyStar⭐️ and the GUI interface.
 """
-# import the required modules
+# import the required internal modules
 import QuestionsModel as qm
+
+# import the required external modules
 from tkinter import * 
 import tkinter as tk
 from tkinter import messagebox # necessary for the Instructions dialogue box
@@ -38,8 +40,7 @@ class MainQuizApp():
 		"""
 		Function to displays the instructions for StudyStar⭐️ in a messagebox.
 		"""
-		messagebox.showinfo(title="About StudyStar⭐️", message=(
-															'Welcome to StudyStar⭐️ - an app for all your studying needs! '
+		messagebox.showinfo(title="About StudyStar⭐️", message=('Welcome to StudyStar⭐️ - an app for all your studying needs! '
 		 													'To begin studying, please click the “Load File and Start Quiz” button. '
 		 													'This button will open up a file selector where you can choose any .csv file to run through the app. '
 		 													'Please see the ReadMe.md for full information on how the question set file will need to '
