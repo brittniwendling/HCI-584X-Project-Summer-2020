@@ -2,16 +2,17 @@
 This is a data-driven TKinter quiz application written in Python 3.7. The purpose of StudyStar⭐️ is to allow users to create their own question set .csv files and have a way to have the sets presented back to them in order to quiz themselves on the content. This prevents the need of using physical flashcards or things of that nature that require a lot of manual effort. The target users for StudyStar are students, professionals, and anyone who needs a resource for studying to reinforce learning material. 
 
 Here are the project file/folder structures:
-main.py: imports from the stuff module (the local stuff.py file)
-run_testpak.py: uses a simple package (called testpak) that can be installed via pip.
+main.py: imports from the QuestionsModel and CreateQuizApp module
+QuestionsModel.py: uses a simple package (called testpak) that can be installed via pip.
+CreateQuizApp.py: 
 
 # Requirements
-In order to run the program, it is recommended to have Python 3.7. All of the packages in this project are part of the Python Standard Library and should not require separate installations. Here is a list of the Python Standard Library packages and modules used:
-tkinter
-datetime
-time
-csv
-random
+In order to run the program, it is recommended to have Python 3.7. All of the packages in this project are part of the Python Standard Library and should not require separate installations. Here is a list of the Python Standard Library packages and modules used in the program:
+1. tkinter
+2. datetime
+3. time
+4. csv
+5. random
 
 # Installation
 No additional packages required on install.
