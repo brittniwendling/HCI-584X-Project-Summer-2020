@@ -1,25 +1,29 @@
 #-------------------------------------------------------------------------------
 # Name:      CreateQuizApp.py
-# Purpose:   Primary program flow for StudyStar⭐️ Quiz Application
+# Purpose:   Primary program flow for creating the StudyStar⭐️ Quiz Application
 # Author(s): Brittni Wendling
 # Created:   06/09/2020
 # Updated:   08/07/2020
 #-------------------------------------------------------------------------------
 
-'''Top of module Docstring'''
-
+"""
+This module handles the primary program flow for StudyStar⭐️ and the GUI interface.
+"""
 # import the required modules
 import QuestionsModel as qm
 from tkinter import * 
 import tkinter as tk
 from tkinter import messagebox # necessary for the Instructions dialogue box
 from tkinter import ttk # necessary for the Progressbar widget
-from tkinter import filedialog
+from tkinter import filedialog # necessary for user's self-selecting .csv files
 import time
 
 class MainQuizApp():
+	""" Main application class.
+
+    Most of the navigation classes and functions, as well as StudyStar⭐️ GUI display code is located in this class.
+	"""
 	def __init__(self, questions_file=''):
-		'''Create MainQuizApp class'''
 		self.filename = questions_file
 		self._build_gui() # build_gui function
 		self.clock() # run clock function
@@ -31,7 +35,9 @@ class MainQuizApp():
 		self.root.mainloop() # have the root window go live, loop until quit
 
 	def about(self):
-		'''Show instructions for StudyStar⭐️'''
+		"""
+		Function to displays the instructions for StudyStar⭐️ in a messagebox.
+		"""
 		messagebox.showinfo(title="About StudyStar⭐️", message=(
 															'Welcome to StudyStar⭐️ - an app for all your studying needs! '
 		 													'To begin studying, please click the “Load File and Start Quiz” button. '
@@ -48,25 +54,35 @@ class MainQuizApp():
 		return
 	
 	def browse_files(self):
-		'''User choose .csv file'''
+		"""
+		Function that allows the user choose to select a .csv file using a filedialog box.
+		"""
 		self.filename = filedialog.askopenfilename(initialdir="", title="Select a csv file:", filetypes=[("csv files", "*.csv"), ("all files", "*.*")])
 
 	def get_question(self):
-		'''Get question from user's selected .csv file'''
+		"""
+		Function that pulls the question strings from the selected .csv file.
+		"""
 		return self.questions[self.current_question_index][0]
 
 	def get_options(self):
-		'''options from .csv file'''
+		"""
+		Function that pulls the question choice strings from the selected .csv file.
+		"""
 		print(self.current_question_index)
 		print(self.questions[self.current_question_index])
 		return self.questions[self.current_question_index][1:-1]
 
 	def get_current_answer(self):
-		'''correct answer from .csv file'''
+		"""
+		Function that pulls the correct answer strings from the selected .csv file.
+		"""
 		return self.questions[self.current_question_index][-1]
 
 	def start(self):
-		'''start showing questions'''
+		"""
+		Function that begins the quiz and start showing questions along with their option choices.
+		"""
 		self.questions = qm.get_questions(self.filename)
 		#self.qset_filename_label.grid(row=15) # show reading from filename
 		current_question = self.get_question()
@@ -87,16 +103,23 @@ class MainQuizApp():
 		self.points_possible = self.number_of_questions * 10 #total points possible
 
 	def step(self):
-		'''increase step of progress bar'''
+		"""
+		Function that increases the step of progress bar in relation to how many questions are in the question set.
+		"""
 		self.my_progress['value'] += 100/self.number_of_questions
 		#print(self.my_progress['value']) #DEBUG
 
 	def is_answer_correct(self):
-		'''check if answer is correct'''
+		"""
+		Function that checks whether a selected answer is correct.
+		"""
 		return self.get_current_answer() == self.get_options()[self.user_answer.get()-1]
 
 	def _update_answer_label(self):
-		'''update answer label correct/incorrect'''
+		"""
+		Function that updates the answer label shown as correct/incorrect and updates the quiz variables: points, number
+		right, and tries.
+		"""
 		while True:
 			if self.is_answer_correct():
 				status = 'Correct! +10 points!'
@@ -125,15 +148,21 @@ class MainQuizApp():
 				break
 			
 	def _update_questions_remaining(self):
-		'''Docstring'''
+		"""
+		Function that continues running through the quiz if all of the questions have not been gone through yet.
+		"""
 		pass
 
 	def _update_question(self,question):
-		'''Docstring'''
+		"""
+		Function that updates the question label shown to the next one in the set.
+		"""
 		self.questions_label.config(text=question)
 
 	def get_next_question(self):
-		'''Docstring'''
+		'''
+		Function that gets the next question in the set and responds by showing quiz stats if there are no more questions left.
+		'''
 		self.current_question_index += 1
 		if self.current_question_index == len(self.questions):# if last question has been answered
 			#self._update_question.grid_forget()
@@ -151,24 +180,33 @@ class MainQuizApp():
 		self._update_options(self.get_options())
 
 	def check_and_update(self):
-		'''check answer and update label'''
+		"""
+		Function updates the answer label showon to incorrect/correct based on whether the user answered correctly. After a set 
+		time, the function will update to get the next question in the set.
+		"""
 		self._update_answer_label()
 		self.root.after(1500,self.get_next_question)
 
 	def _make_options(self,options_list):
-		'''Docstring'''
+		"""
+		Function that makes the GUI radio buttons for the question answer options.
+		"""
 		for option,index in zip(options_list,range(len(options_list))):
 			self.option_buttons.append(tk.Radiobutton(self.questions_box, text=option, font='Helvetica 16', bg='#375e97',fg='white', value=index+1, variable=self.user_answer))
 			self.option_buttons[-1].grid(row=index+1)
 
 	def _update_options(self,options_list):
-		'''Docstring'''
+		"""
+		Function that updates the option choices shown to the ones for the next question in the set.
+		"""
 		self.user_answer.set(7)
 		for option_button,option,index in zip(self.option_buttons,options_list,range(len(options_list))):
 			option_button.config(text=option, value=index+1)
 	
 	def clock(self):
-		'''creates and displays a clock'''
+		"""
+		Function that creates and displays a clock showing current time in Hour:Minute:Seconds:PM/AM.
+		"""
 		self.hour = time.strftime("%I") # hour
 		self.minute = time.strftime("%M") # minute
 		self.second = time.strftime("%S") # second
@@ -180,7 +218,9 @@ class MainQuizApp():
 		self.clock_label.after(1000, self.clock) # update clock
 
 	def _build_gui(self):
-		'''build GUI components'''
+		"""
+		Function that builds primary GUI components of application.
+		"""
 		self.root = tk.Tk()  # create a Tk window object, call it root
 		self.root.geometry('600x300') # window size
 		self.root.title("StudyStar⭐️") # window title
@@ -216,4 +256,3 @@ class MainQuizApp():
 
 		# Study Again button
 		self.study_again_button = tk.Button(self.root, text="Study Again",font='Helvetica 16', fg='#3f681c', highlightbackground='#375e97', command=None) #TODO
-

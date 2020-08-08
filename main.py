@@ -6,11 +6,13 @@
 # Updated:   08/07/2020
 #-------------------------------------------------------------------------------
 
-'''Main file - run this!
+"""Main file - run this!
+
 This is a data-driven TKinter quiz application written in Python 3.7. The purpose of StudyStar⭐️ is to
 allow users to create their own question sets via .csv files. The question sets .csv files are run through
 the app and presented back to users in order to quiz themselves on the content. 
-github repo: https://github.com/brittniwendling/HCI-584X-Project-Summer-2020 ''' 
+github repo: https://github.com/brittniwendling/HCI-584X-Project-Summer-2020
+"""
 
 from CreateQuizApp import *
 
