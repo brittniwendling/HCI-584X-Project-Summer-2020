@@ -24,7 +24,7 @@ No additional packages are required on install.
 First, clone the project file.
 main.py: run in the project root folder. Open an OSterminal, use cd to jump to the project root folder, and give main.py to a python interpreter: "python main.py", so it can import from QuestionsModel.py and CreateQuizApp.py.
 
-To begin using StudyStar⭐️, users will need to have create .csv files storing question sets prior to starting the application. The structuring requirements for these .csv files to work properly with the application are described below. To see an example of what this structuring looks like, please see the 3 .csv file exmaples located in the "questions csv files" folder in the root project folder. You are encouraged to save the .csv files you create in this folder as well.
+To begin using StudyStar⭐️, users will need to have previously created .csv files storing question sets prior to starting the application. The structuring requirements for these .csv files to work properly with the application are described below. To see an example of what this structuring looks like, please see the 3 .csv file exmaples located in the "questions csv files" folder in the root project folder. You are encouraged to save the .csv files you create in this folder as well.
 
 .csv file structuring guidelines: 
 1. Have the first row of the .csv file be a header row with the names "Question", "Choice 1", Choice 2", Choice 3", Choice 4", "Correct Answer". Although it is technically possible to have more than 4 "Choice" options, it is not recommended, due to keeping the GUI clean and quiz clean from complications.
