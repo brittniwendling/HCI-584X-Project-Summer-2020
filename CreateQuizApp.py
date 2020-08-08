@@ -41,17 +41,17 @@ class MainQuizApp():
 		Function to displays the instructions for StudyStar⭐️ in a messagebox.
 		"""
 		messagebox.showinfo(title="About StudyStar⭐️", message=('Welcome to StudyStar⭐️ - an app for all your studying needs! '
-		 													'To begin studying, please click the “Load File and Start Quiz” button. '
-		 													'This button will open up a file selector where you can choose any .csv file to run through the app. '
-		 													'Please see the ReadMe.md for full information on how the question set file will need to '
-															'be structured in order to work properly with the app. After you choose your .csv file to load, StudyStar⭐️ '  
-															'will automatically begin the quiz. One question will be shown at a time, where you will '
-															'choose your answer and click the “Check Answer” button. You will then be provided with '
-															'feedback on whether your answer was correct. A progress bar is shown at the bottom of the quiz, '
-															'which shows you real-time feedback of your progress towards finishing the quiz. '
-															'Once you answer all of the questions, you will be shown how many questions you got right '
-															'and your total score! Exit the quiz at any time by clicking the “Quit Quiz” button in the top right corner. '
-															'Have fun, and good luck studying!'))
+		 							'To begin studying, please click the “Load File and Start Quiz” button. '
+		 							'This button will open up a file selector where you can choose any .csv file to run through the app. '
+		 							'Please see the ReadMe.md for full information on how the question set file will need to '
+									'be structured in order to work properly with the app. After you choose your .csv file to load, StudyStar⭐️ '  
+									'will automatically begin the quiz. One question will be shown at a time, where you will '
+									'choose your answer and click the “Check Answer” button. You will then be provided with '
+									'feedback on whether your answer was correct. A progress bar is shown at the bottom of the quiz, '
+									'which shows you real-time feedback of your progress towards finishing the quiz. '
+									'Once you answer all of the questions, you will be shown how many questions you got right '
+									'and your total score! Exit the quiz at any time by clicking the “Quit Quiz” button in the top right corner. '
+									'Have fun, and good luck studying!'))
 		return
 	
 	def browse_files(self):
