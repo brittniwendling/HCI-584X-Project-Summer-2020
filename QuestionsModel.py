@@ -8,7 +8,7 @@
 
 """
 This module serves as the program flow for reading the questions set .csv files.
-It is used in the main.py file.
+It is used in the CreateQuizApp.py file.
 """
 
 # import the required modules
